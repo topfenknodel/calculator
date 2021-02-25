@@ -1,0 +1,41 @@
+#display {
+    display: block;
+    height: 50px;
+    width: 355px;
+    border: 1px solid #f79d65;
+    border-radius: 2px;
+    margin: auto;
+    text-align: right;
+    padding: 10px;
+    margin: auto;
+    font-size: 24px;
+    color: #f7b267;
+}
+
+#calc {
+    display: block;
+    position: relative;
+    top: 70px;
+    height: 400px;
+    width: 400px;
+    margin: auto;
+    padding: 50px 10px 40px 10px;
+    border: 1px solid #f7b267;
+}
+
+#button {
+    width: 400px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+}
+
+button {
+    height: 50px;
+    width: 70px;
+    margin: 15px;
+    border: transparent;
+    color: white;
+    background-color: #f4845f;
+
+}
