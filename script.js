@@ -1,5 +1,5 @@
 function add(a, b) {
-    return a + b;
+    return Number(a) + Number(b);
 }
 
 function subtract(c, d) {
@@ -10,8 +10,16 @@ function multiply(x, y) {
     return x * y;
 }
 
-function divide(x ,y) {
-    return x / y;
+function divide(x, y) {
+    if ( x == 0 && y != 0) {
+        return x / y;
+    }
+    else if (y == 0) {
+        return "nope";
+    }
+    else {
+        return x / y;
+    }
 }
 
 const operate = function (operator, num1, num2) {
@@ -20,27 +28,120 @@ const operate = function (operator, num1, num2) {
         case "+":
             result = add(num1, num2);
             break;
-        case "-":
+        case "−":
             result = subtract(num1, num2);
             break;
-        case "*":
+        case "×":
             result = multiply(num1, num2);
             break;
-        case "/":
+        case "÷":
             result = divide(num1, num2);            
     }   
-    return result;  
+    if (result === "nope") {
+        return result;
+    }
+    else {
+        return Math.round(result * 100) / 100;
+    }
+      
 }
 
-const btn = document.createElement('p');
-btn.textContent = "";
-
+let dec = false,
+    tenths = false;
 
 function populateDisplay (bt) {
     const display = document.querySelector('#display');
     btn.textContent += bt;
     display.appendChild(btn);
+    
+    if (bt == '+' || bt == '−' || bt == '×' || bt == '÷') {
+        if (operator != "") {
+            num1 = operate(operator, num1, num2);
+            operator = bt;
+            num2 = "";
+            btn.textContent = num1 + operator;
+        }
+        else {
+            operator = bt;
+        }
+        dec = false;
+        btDecimal.disabled = false;
+        tenths = false;
+    }
+    else if (bt == '.') {       
+        dec = true;   
+        btDecimal.disabled = true; 
+    }
+    else {
+        if (dec) {
+            if (!operator) {
+                if (!tenths){
+                    num1 = Number(`${num1}.${bt}`);
+                    tenths = true;
+                }
+                else {
+                    num1 = Number(`${num1}${bt}`);
+                }    
+            }
+            else {
+                if (!tenths){
+                    num2 = Number(`${num2}.${bt}`);
+                    tenths = true;
+                }
+                else {
+                    num2 = Number(`${num2}${bt}`);
+                }
+            }
+        }
+        else {
+            if (num1 && operator) {
+                num2 += Number(bt);
+            }
+            else {
+                num1 += Number(bt); 
+            }
+        }
+    }
 }
+
+function clearDisplay () {
+    btn.textContent = "";
+    display.appendChild(btn);
+    operator = "";
+    num1 = "";
+    num2 = "";
+    dec = false;
+    tenths = false;
+    btDecimal.disabled = false;
+}
+
+function showSolution () {
+    let result = operate(operator, num1, num2);
+    btn.textContent = result;
+    display.appendChild(btn);
+    num1 = result;
+    num2 = "";
+    operator = "";
+    //dec = false;
+    let str = num1.toString();
+    if (str.includes(".")) {
+        btDecimal.disabled = true;
+        tenths = true;
+    }
+    else {
+        btDecimal.disabled = false;
+        tenths = false;
+    }
+}
+
+let operator = "",
+    num1 = "",
+    num2 = "";
+
+const display = document.querySelector('#display');
+
+const btn = document.createElement('p');
+btn.textContent = "";
 
 const bt0 = document.querySelector('#zero');
 bt0.onclick = () => populateDisplay('0');
@@ -83,3 +184,12 @@ btMul.onclick = () => populateDisplay('×');
 
 const btDiv = document.querySelector('#divide');
 btDiv.onclick = () => populateDisplay('÷');
+
+const btClear = document.querySelector('#clear');
+btClear.onclick = () => clearDisplay();
+
+const btEquals = document.querySelector('#equals');
+btEquals.onclick = () => showSolution();
+
+const btDecimal = document.querySelector('#decimal');
+btDecimal.onclick = () => populateDisplay('.'); 
