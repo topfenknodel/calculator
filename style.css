@@ -1,16 +1,22 @@
+body {
+    background-color: #ffffff;
+}
+
 #display {
     display: block;
-    height: 50px;
+    position: relative;
+    height: 70px;
     width: 355px;
-    border: 1px solid #ffffff;
+    bottom: 20px;
+    border: 1px solid #fcfcfc;
     border-radius: 2px;
     margin: auto;
     text-align: right;
     padding: 10px;
     margin: auto;
     font-size: 24px;
-    color: #f7b267;
-    background-color: white;
+    color: #838383;
+    background-color: #fcfcfc;
     font-family: 'Inter', sans-serif;
 }
 
@@ -18,12 +24,13 @@
     display: block;
     position: relative;
     top: 70px;
-    height: 440px;
+    height: 470px;
     width: 400px;
     margin: auto;
     padding: 50px 10px 40px 10px;
     border: 1px solid #f1f1f1;
     background-color: #f1f1f1;
+    border-radius: 6px;
 }
 
 #button {
@@ -37,6 +44,16 @@
 #equals {
     grid-area: 5 / 3 / 6 / 5;
     background-color: #f71735;
+    border-radius: 5px;
+}
+
+#equals:active {
+    background-color: #de142f;
+    transform: scale(0.95);
+}
+
+#equals:hover {
+    background-color: #de142f;
 }
 
 #add,
@@ -44,11 +61,43 @@
 #multiply,
 #divide {
     background-color: #41ead4;
+    border-radius: 5px;
+}
+
+#add:active,
+#subtract:active,
+#multiply:active,
+#divide:active {
+    background-color: #3ad2be;
+    transform: scale(0.95);
+}
+
+#add:hover,
+#subtract:hover,
+#multiply:hover,
+#divide:hover {
+    background-color: #3ad2be;
+}
+
+#clear {
+    grid-area: 4/1/6/2;
 }
 
 #clear,
 #backspace {
     background-color: #ff9f1c;
+    border-radius: 5px;
+}
+
+#clear:active,
+#backspace:active {
+    background-color: #e58f19;
+    transform: scale(0.95);
+}
+
+#clear:hover,
+#backspace:hover {
+    background-color: #e58f19
 }
 
 button {
@@ -56,5 +105,16 @@ button {
     border: transparent;
     color: white;
     background-color: #8c9fb1;
+    border-radius: 5px;
     font-family: 'Inter', sans-serif;
+    cursor: pointer;
+}
+
+button:active {
+    background-color: #7e8f9f;
+    transform: scale(0.95);
+}
+
+button:hover {
+    background-color: #7e8f9f;
 }

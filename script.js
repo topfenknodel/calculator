@@ -115,6 +115,27 @@ function clearDisplay () {
     btDecimal.disabled = false;
 }
 
+function clearEntry () {
+    let str = btn.textContent;
+    if (str[str.length-1] == ".") {
+        btDecimal.disabled = false;
+        dec = false;
+        tenths = false;
+    }
+    str = str.slice(0, str.length-1);
+    btn.textContent = str;
+    if (!operator) {
+        num1 = str;
+    }
+    else if (operator && !(num2)) {
+        operator = "";
+    }
+    else {
+        let str2 = str.slice(str.indexOf(operator)+1);
+        num2 = str2;
+    }
+}
+
 function showSolution () {
     let result = operate(operator, num1, num2);
     btn.textContent = result;
@@ -127,10 +148,12 @@ function showSolution () {
     if (str.includes(".")) {
         btDecimal.disabled = true;
         tenths = true;
+        dec = true;
     }
     else {
         btDecimal.disabled = false;
         tenths = false;
+        dec = false;
     }
 }
 
@@ -193,3 +216,6 @@ btEquals.onclick = () => showSolution();
 
 const btDecimal = document.querySelector('#decimal');
 btDecimal.onclick = () => populateDisplay('.'); 
+
+const btBack = document.querySelector('#backspace');
+btBack.onclick = () => clearEntry();
